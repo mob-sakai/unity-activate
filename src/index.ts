@@ -7,7 +7,7 @@ import getPackageVersion from '@jsbits/get-package-version'
 const cli = cac();
 cli.command('[opts] <file>', 'Activate Unity activation license file (*.alf).\nNOTE: If two-factor authentication is enabled, the verify code will be requested.')
     .option('-o, --out <dir>', 'Output ulf file to the specified directory', { default: '.' })
-    .option('-u, --username <username>', 'User name or email to login Unity (default: $UNITY_USERNAME)')
+    .option('-u, --username <username>', 'Username (email) to login Unity (default: $UNITY_USERNAME)')
     .option('-p, --password <password>', 'Password to login Unity (default: $UNITY_PASSWORD)')
     .option('-s, --serial <serial>', 'Serial key to activate. If empty, activate as personal license.\nNOTE: Unity Personal Edition is not available to companies or organizations that earned more than USD100,000 in the previous fiscal year.\n')
     .option('-d, --debug', 'Run "headful" puppeteer', { default: false })

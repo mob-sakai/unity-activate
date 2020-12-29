@@ -56,9 +56,9 @@ export class Activator extends Crawler {
         const username = this.options.username || await this.readUserInput("username: ");
         const password = this.options.password || await this.readUserInput("password: ", true);
 
-        // [[ CHECK ]] The username is incorrect
+        // [[ CHECK ]] The username (email) is incorrect
         if (!/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(username))
-            throw new Error(`The email is incorrect: ${username}`);
+            throw new Error(`The username (email) is incorrect: ${username}`);
 
         // Step: type the username and password
         await page.type('input[type=email]', username);
