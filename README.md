@@ -30,7 +30,7 @@ NOTE: If two-factor authentication is enabled, the verify code will be requested
 
 Options:
   -o, --out <dir>              Output ulf file to the specified directory (default: .)
-  -u, --username <username>    User name or email to login Unity (default: $UNITY_USERNAME)
+  -u, --username <username>    Username (email) to login Unity (default: $UNITY_USERNAME)
   -p, --password <password>    Password to login Unity (default: $UNITY_PASSWORD)
   -s, --serial <serial>        Serial key to activate (default: $UNITY_SERIAL). If empty, activate as personal license.
 NOTE: Unity Personal Edition is not available to companies or organizations that earned more than USD100,000 in the previous fiscal year.
@@ -62,31 +62,27 @@ Or, with UnityHub (`Settings > License Management > MANUAL ACTIVATION > SAVE LIC
 
 ### Step 2: Request a license (*.ulf)
 
-`unity-activate`コマンドで
+Run `unity-activate` to download the `*.ulf` file.
 
 ```sh
-# As personal license (with interaction):
+# For personal license (with interaction):
 $ unity-activate ***.alf
+$   > enter the username and password
 $ username: your@email.com
 $ password: *****
 ...
 
-# As personal license:
+# For personal license:
 $ unity-activate --username your@email.com --password your_password ***.alf
 
-# As professional license (with --serial option):
+# For professional license (with --serial option):
 $ unity-activate --username your@email.com --password your_password --serial your_serial_code ***.alf
 
 # Use environment variables instead of options:
 $ export UNITY_USERNAME=your@email.com
 $ export UNITY_PASSWORD=your_password
 $ export UNITY_SERIAL=your_serial_code # If empty, activate as personal license.
-$ unity-activate *.alf
-...
-
-# A license file 'Unity_v2019.x.ulf' will be saved
-$ ls
-Unity_v2019.x.ulf ...
+$ unity-activate ***.alf
 ```
 
 <br><br>
