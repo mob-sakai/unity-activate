@@ -13,13 +13,34 @@ Inspired by https://github.com/MizoTake/unity-license-activate.
 
 <br><br><br><br>
 
-## Install
+## Usage as a node module:
 
 ```sh
-npm install -g unity-activate
+npm install unity-activate
 ```
 
-## Usage
+```js
+const { ActivatorOptions, Activator } = require('unity-activate');
+
+(async () => {
+    new Activator({
+        file :'input.alf',
+        username :'username',
+        password :'password',
+        serial :'serial_code',
+        out :'output_dir',
+      }).run();
+})();
+```
+
+<br><br><br><br>
+
+## Usage as a command-line utility:
+
+```sh
+# Installation:
+npm install -g unity-activate
+```
 
 ```sh
 Usage:
