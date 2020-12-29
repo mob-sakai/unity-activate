@@ -3,7 +3,7 @@ unity-activate
 
 A tool to automate the manual activation of unity license using puppeteer.
 
-Inspired by https://github.com/MizoTake/unity-license-activate.
+Inspired by https://github.com/MizoTake/unity-license-activate (@MizoTake).
 
 [![npm](https://img.shields.io/npm/v/unity-activate)](https://www.npmjs.com/package/unity-activate)
 ![license](https://img.shields.io/npm/l/unity-activate)
