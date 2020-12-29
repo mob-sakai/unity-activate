@@ -1,7 +1,7 @@
 {
   "name": "unity-activate",
   "version": "1.0.0",
-  "description": "",
+  "description": "A tool to activate Unity license.",
   "license": "MIT",
   "engines": {
     "node": ">=10"
@@ -12,6 +12,9 @@
   },
   "author": "mob-sakai <sakai861104@gmail.com>",
   "bin": "./dist/index.js",
+  "files": [
+    "dist/**/*.js"
+  ],
   "scripts": {
     "build": "tsc",
     "lint": "eslint --fix \"src/**/*\"",
@@ -20,15 +23,6 @@
     "release": "npx semantic-release",
     "release:debug": "npx semantic-release --debug --dry-run -no-ci",
     "watch": "tsc --watch"
-  },
-  "release": {
-    "branches": [
-      "main",
-      {
-        "name": "beta",
-        "prerelease": true
-      }
-    ]
   },
   "dependencies": {
     "@jsbits/get-package-version": "^1.0.3",
