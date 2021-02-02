@@ -84,7 +84,7 @@ export abstract class Crawler {
 
         // move to download path
         const downloadPath = path.resolve(this.downloadDir, downloadFile);
-        fs.renameSync(
+        fs.copyFileSync(
             path.resolve(this.tmpDir, downloadFile),
             downloadPath
         );
