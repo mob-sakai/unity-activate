@@ -4,29 +4,26 @@ on:
   push:
     branches:
       - main
-      - alpha
       - beta
     tags-ignore:
       - "**"
 
 jobs:
   release:
+    if: "! contains(github.event.head_commit.message, '[skip ci]') && ! contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      
       - run: |
           npm ci
           npm run build
 
       - uses: cycjimmy/semantic-release-action@v2
+        with:
+          extra_plugins: |
+            @semantic-release/changelog
+            @semantic-release/git
         env:
           GITHUB_TOKEN: ${{ github.token }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
