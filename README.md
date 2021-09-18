@@ -27,6 +27,7 @@ const { ActivatorOptions, Activator } = require('unity-activate');
         file :'input.alf',
         username :'username',
         password :'password',
+        authKey :'authenticator_key',
         serial :'serial_code',
         out :'output_dir',
       }).run();
@@ -53,6 +54,7 @@ Options:
   -o, --out <dir>              Output ulf file to the specified directory (default: .)
   -u, --username <username>    Username (email) to login Unity (default: $UNITY_USERNAME)
   -p, --password <password>    Password to login Unity (default: $UNITY_PASSWORD)
+  -k, --key <key>              The authenticator key to login (default: $UNITY_KEY).
   -s, --serial <serial>        Serial key to activate (default: $UNITY_SERIAL). If empty, activate as personal license.
 NOTE: Unity Personal Edition is not available to companies or organizations that earned more than USD100,000 in the previous fiscal year.
  
@@ -123,6 +125,30 @@ $ /Applications/Unity/Unity.app/Contents/MacOS/Unity -batchmode -manualLicenseFi
 Or, with UnityHub.
 
 ![](https://user-images.githubusercontent.com/12690315/103255739-d70cdd80-49cd-11eb-9d18-62600a20085f.png)
+
+<br><br>
+
+### Option: Activate with authenticator key
+
+Signing in to Unity requires authentication via email or a authenticator app (eg. Google Authenticator).
+You can use an authenticator key instead of those.
+
+```sh
+$ unity-activate --username your@email.com --password your_password --key your_authenticator_key ***.alf
+```
+
+#### How to obtain authenticator key
+
+- Login to Unity account and activate new two factor authentication.  
+Go to https://id.unity.com/en/settings/tfa/new and click `Start setup`  
+![](https://user-images.githubusercontent.com/12690315/133873890-7bdeb10d-2bde-497b-83e0-2c3586e526ad.png)
+- Select `Authenticator App` and click `Next`  
+![](https://user-images.githubusercontent.com/12690315/133873893-e1894f2b-67d3-4b7a-877f-70c9613cba24.png)
+- Click `Can't scan the barcode?`.  
+Find and save the authenticator key  
+![](https://user-images.githubusercontent.com/12690315/133878441-19553b38-3bd5-492f-a27a-6974923b4add.png)
+- Verify activation with Google Authenticator. You can also verify using a QR code  
+![](https://user-images.githubusercontent.com/12690315/133878444-0f11a58b-9a4f-4f0e-9856-a33bfa243eaa.png)
 
 <br><br><br><br>
 
