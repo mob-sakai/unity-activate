@@ -1,4 +1,3 @@
-import { Browser, Page } from 'puppeteer';
 import { authenticator } from 'otplib';
 import { Crawler } from './crawler';
 import fs from 'fs';
@@ -19,28 +18,10 @@ export class Activator extends Crawler {
     constructor(options: ActivatorOptions) {
         super(!options.debug, options.out);
         this.options = options;
+        this.debug(`options:`, JSON.stringify(this.options));
     }
 
-    readUserInput(question: string, password: boolean = false, timeout: number = 5 * 60 * 1000): Promise<string> {
-        return new Promise<string>(resolve => {
-            // Timeout (5 minutes)
-            setTimeout(_ => {
-                console.log("timeout");
-                resolve("");
-            }, timeout);
-
-            const readline = require('readline').createInterface({ input: process.stdin, output: process.stdout });
-            readline.stdoutMuted = password;
-            readline.question(question, (answer: string) => {
-                resolve(answer);
-                readline.close();
-            });
-
-            readline._writeToOutput = (s: string) => readline.output.write(password && /\w/.test(s) ? "*" : s);
-        });
-    }
-
-    protected async crawl(_: Browser, page: Page) {
+    protected async crawl() {
         console.log(`Start activating '${this.options.file}'`);
 
         // [[ CHECK ]] Input file is not found.
@@ -49,9 +30,9 @@ export class Activator extends Crawler {
 
         // Step: goto manual activation page
         console.log("  > goto manual activation page")
-        await page.goto('https://license.unity3d.com/manual')
+        await this.goto('https://license.unity3d.com/manual')
         await this.waitForNavigation();
-        await page.waitForSelector('#new_conversations_create_session_form #conversations_create_session_form_password')
+        await this.waitForSelector('#new_conversations_create_session_form #conversations_create_session_form_password')
 
         // Step: enter the username and password
         console.log("  > enter the username and password")
@@ -63,18 +44,18 @@ export class Activator extends Crawler {
             throw new Error(`The username (email) is incorrect: ${username}`);
 
         // Step: close cookie dialog
-        await page.waitForTimeout(2000);
+        await this.waitForTimeout(2000);
         if (await this.exists('#onetrust-close-btn-container > button'))
-            await page.click('#onetrust-close-btn-container > button');
+            await this.click('#onetrust-close-btn-container > button');
 
         // Step: type the username and password
-        await page.type('input[type=email]', username);
-        await page.type('input[type=password]', password);
+        await this.type('input[type=email]', username);
+        await this.type('input[type=password]', password);
 
         // Step: login
         console.log("  > login")
-        await page.waitForTimeout(1000);
-        await page.click('input[name="commit"]');
+        await this.waitForTimeout(1000);
+        await this.click('input[name="commit"]');
         await this.waitForNavigation();
 
         // [[ CHECK ]] The username and/or password are incorrect
@@ -88,8 +69,8 @@ export class Activator extends Crawler {
                 ? authenticator.generate(this.options.key.replace(/ /g, ''))
                 : await this.readUserInput("verify code (Check your authenticator app): ");
 
-            await page.type('input[class=verify_code]', code)
-            await page.click('input[value="Verify"]')
+            await this.type('input[class=verify_code]', code)
+            await this.click('input[value="Verify"]')
             await this.waitForNavigation();
 
             // [[ CHECK ]] Verify code is invalid
@@ -102,8 +83,8 @@ export class Activator extends Crawler {
             console.log("  > verify (email)")
             const code = await this.readUserInput(`verify code (Check your email: ${this.options.username}): `);
 
-            await page.type('input[class=req]', code)
-            await page.click('input[value="Verify"]')
+            await this.type('input[class=req]', code)
+            await this.click('input[value="Verify"]')
             await this.waitForNavigation();
 
             // [[ CHECK ]] Verify code is invalid
@@ -114,7 +95,7 @@ export class Activator extends Crawler {
         // Step: upload alf file.
         console.log("  > upload alf file")
         await (await this.waitForSelector('input[name="licenseFile"]')).uploadFile(this.options.file)
-        await page.click('input[name="commit"]')
+        await this.click('input[name="commit"]')
         await this.waitForNavigation();
 
         // [[ CHECK ]] Not valid for Unity activation license file
@@ -125,7 +106,7 @@ export class Activator extends Crawler {
         console.log("  > select license options")
         if (0 < this.options.serial.length) {
             await this.waitAndClick('input[id="type_serial"][value="serial"]');
-            await page.type('input[id="serial"][name="serial"]', this.options.serial);
+            await this.type('input[id="serial"][name="serial"]', this.options.serial);
             await this.waitAndClick('input[value="Next"][name="commit"][class="btn"]')
 
             // [[ CHECK ]] Invalid serial
@@ -139,7 +120,7 @@ export class Activator extends Crawler {
 
         // Step: download ulf
         console.log("  > download ulf")
-        await page.waitForTimeout(500);
+        await this.waitForTimeout(500);
         await this.waitAndClick('input[name="commit"]');
         const ulf = await this.waitForDownload();
 
