@@ -33,6 +33,7 @@
   "dependencies": {
     "@jsbits/get-package-version": "^1.0.3",
     "cac": "^6.7.1",
+    "otplib": "^12.0.1",
     "puppeteer": "^5.4.0"
   },
   "devDependencies": {

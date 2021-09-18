@@ -1,4 +1,5 @@
 import { Browser, Page } from 'puppeteer';
+import { authenticator } from 'otplib';
 import { Crawler } from './crawler';
 import fs from 'fs';
 
@@ -6,6 +7,7 @@ export interface ActivatorOptions {
     debug: boolean;
     username: string;
     password: string;
+    key: string;
     serial: string;
     file: string;
     out: string;
@@ -82,7 +84,9 @@ export class Activator extends Crawler {
         // Step: enter two-factor authentication code if requested
         if (await this.exists('input[class=verify_code]')) {
             console.log("  > verify (two-factor authentication)")
-            const code = await this.readUserInput("verify code: ");
+            const code = this.options.key
+                ? authenticator.generate(this.options.key.replace(/ /g, ''))
+                : await this.readUserInput("verify code (Check your authenticator app): ");
 
             await page.type('input[class=verify_code]', code)
             await page.click('input[value="Verify"]')
@@ -96,7 +100,7 @@ export class Activator extends Crawler {
         // Step: enter email verify code if requested
         if (await this.exists('input[class=req]')) {
             console.log("  > verify (email)")
-            const code = await this.readUserInput("verify code: ");
+            const code = await this.readUserInput(`verify code (Check your email: ${this.options.username}): `);
 
             await page.type('input[class=req]', code)
             await page.click('input[value="Verify"]')
