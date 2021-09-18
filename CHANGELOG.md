@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/mob-sakai/unity-activate/compare/v1.3.0...v1.3.1) (2021-09-18)
+
+
+### Bug Fixes
+
+* replace rename with copyFile ([a7f1cfe](https://github.com/mob-sakai/unity-activate/commit/a7f1cfed03c696bc31c2b81a5e52441814478488))
+
 # [1.3.0](https://github.com/mob-sakai/unity-activate/compare/v1.2.0...v1.3.0) (2021-09-18)
 
 
