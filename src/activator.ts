@@ -60,12 +60,18 @@ export class Activator extends Crawler {
         if (!/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(username))
             throw new Error(`The username (email) is incorrect: ${username}`);
 
+        // Step: close cookie dialog
+        await page.waitForTimeout(2000);
+        if (await this.exists('#onetrust-close-btn-container > button'))
+            await page.click('#onetrust-close-btn-container > button');
+
         // Step: type the username and password
         await page.type('input[type=email]', username);
         await page.type('input[type=password]', password);
 
         // Step: login
         console.log("  > login")
+        await page.waitForTimeout(1000);
         await page.click('input[name="commit"]');
         await this.waitForNavigation();
 
