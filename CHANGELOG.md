@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/mob-sakai/unity-activate/compare/v1.2.0...v1.3.0) (2021-09-18)
+
+
+### Features
+
+* additional logs in debug mode ([00db824](https://github.com/mob-sakai/unity-activate/commit/00db8244ef7f9b2e63de979d6f1dad081eb87357))
+
 # [1.2.0](https://github.com/mob-sakai/unity-activate/compare/v1.1.2...v1.2.0) (2021-09-18)
 
 
