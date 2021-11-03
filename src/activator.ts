@@ -94,7 +94,11 @@ export class Activator extends Crawler {
 
         // Step: upload alf file.
         console.log("  > upload alf file")
-        await (await this.waitForSelector('input[name="licenseFile"]')).uploadFile(this.options.file)
+        var licenseFile = await this.waitForSelector('input[name="licenseFile"]');
+        if (licenseFile == null)
+            throw new Error(`'input[name="licenseFile"]' is not found`);
+
+        await licenseFile.uploadFile(this.options.file)
         await this.click('input[name="commit"]')
         await this.waitForNavigation();
 

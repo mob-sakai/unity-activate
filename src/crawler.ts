@@ -1,4 +1,4 @@
-import puppeteer, { Page, ElementHandle, ClickOptions, Response } from 'puppeteer';
+import puppeteer, { Page, ElementHandle, ClickOptions, HTTPResponse } from 'puppeteer';
 import { getLogger } from "log4js";
 import * as path from 'path';
 import * as os from 'os';
@@ -54,7 +54,7 @@ export abstract class Crawler {
         logger.debug(message, ...args);
     }
 
-    async goto(url: string): Promise<Response | null> {
+    async goto(url: string): Promise<HTTPResponse | null> {
         logger.debug(`goto: ${url}`);
 
         return await this.page.goto(url);
@@ -118,7 +118,7 @@ export abstract class Crawler {
         return await this.page.waitForTimeout(milliseconds);
     }
 
-    async waitForSelector(selector: string): Promise<ElementHandle> {
+    async waitForSelector(selector: string): Promise<ElementHandle | null> {
         logger.debug(`waitForSelector: ${selector}`);
 
         return await this.page.waitForSelector(selector, { timeout: 2000 });
