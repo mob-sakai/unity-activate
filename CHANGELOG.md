@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/mob-sakai/unity-activate/compare/v1.3.1...v1.3.2) (2021-11-03)
+
+
+### Bug Fixes
+
+* update dependency ([1aab50d](https://github.com/mob-sakai/unity-activate/commit/1aab50df8f037de04d767149ce965792521befb3))
+
 ## [1.3.1](https://github.com/mob-sakai/unity-activate/compare/v1.3.0...v1.3.1) (2021-09-18)
 
 
