@@ -92,6 +92,14 @@ export class Activator extends Crawler {
                 throw new Error('Verify code is invalid');
         }
 
+        // Step: close update dialog
+        await this.waitForTimeout(2000);
+        console.log("  > close update dialog")
+        if (await this.exists('#new_conversations_accept_updated_tos_form button.novalidation.accept')) {
+            await this.click('#new_conversations_accept_updated_tos_form button.novalidation.accept');
+            await this.waitForTimeout(500);
+        }
+
         // Step: upload alf file.
         console.log("  > upload alf file")
         var licenseFile = await this.waitForSelector('input[name="licenseFile"]');
