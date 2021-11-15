@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/mob-sakai/unity-activate/compare/v1.3.2...v1.3.3) (2021-11-15)
+
+
+### Bug Fixes
+
+* add step to close update dialog ([9931c84](https://github.com/mob-sakai/unity-activate/commit/9931c8457d4a8b9c5678b3a09b1c51cd19886d5a)), closes [#7](https://github.com/mob-sakai/unity-activate/issues/7)
+
 ## [1.3.2](https://github.com/mob-sakai/unity-activate/compare/v1.3.1...v1.3.2) (2021-11-03)
 
 
