@@ -58,6 +58,11 @@ export class Activator extends Crawler {
         await this.click('input[name="commit"]');
         await this.waitForNavigation();
 
+        // [[ CHECK ]] The email address has not been confirmed yet
+        if (await this.exists('input[value="Re-send confirmation email"]')) {
+            throw new Error(`The email address has not been confirmed yet: ${username}`);
+        }
+
         // [[ CHECK ]] The username and/or password are incorrect
         if (await this.exists('div[class="error-msg"]'))
             throw new Error(`The username and/or password are incorrect: ${username}`);
