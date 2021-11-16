@@ -31,7 +31,6 @@ export class Activator extends Crawler {
         // Step: goto manual activation page
         console.log("  > goto manual activation page")
         await this.goto('https://license.unity3d.com/manual')
-        await this.waitForNavigation();
         await this.waitForSelector('#new_conversations_create_session_form #conversations_create_session_form_password')
 
         // Step: enter the username and password
@@ -46,7 +45,7 @@ export class Activator extends Crawler {
         // Step: close cookie dialog
         await this.waitForTimeout(2000);
         if (await this.exists('#onetrust-close-btn-container > button'))
-            await this.click('#onetrust-close-btn-container > button');
+            await this.waitAndClick('#onetrust-close-btn-container > button');
 
         // Step: type the username and password
         await this.type('input[type=email]', username);
@@ -56,7 +55,6 @@ export class Activator extends Crawler {
         console.log("  > login")
         await this.waitForTimeout(1000);
         await this.click('input[name="commit"]');
-        await this.waitForNavigation();
 
         // [[ CHECK ]] The email address has not been confirmed yet
         if (await this.exists('input[value="Re-send confirmation email"]')) {
@@ -76,7 +74,6 @@ export class Activator extends Crawler {
 
             await this.type('input[class=verify_code]', code)
             await this.click('input[value="Verify"]')
-            await this.waitForNavigation();
 
             // [[ CHECK ]] Verify code is invalid
             if (await this.exists('div[class="error-msg"]'))
@@ -90,7 +87,6 @@ export class Activator extends Crawler {
 
             await this.type('input[class=req]', code)
             await this.click('input[value="Verify"]')
-            await this.waitForNavigation();
 
             // [[ CHECK ]] Verify code is invalid
             if (await this.exists('div[class="error-msg"]'))
@@ -101,7 +97,7 @@ export class Activator extends Crawler {
         await this.waitForTimeout(2000);
         console.log("  > close update dialog")
         if (await this.exists('#new_conversations_accept_updated_tos_form button.novalidation.accept')) {
-            await this.click('#new_conversations_accept_updated_tos_form button.novalidation.accept');
+            await this.waitAndClick('#new_conversations_accept_updated_tos_form button.novalidation.accept');
             await this.waitForTimeout(500);
         }
 
@@ -113,7 +109,6 @@ export class Activator extends Crawler {
 
         await licenseFile.uploadFile(this.options.file)
         await this.click('input[name="commit"]')
-        await this.waitForNavigation();
 
         // [[ CHECK ]] Not valid for Unity activation license file
         if (! await this.exists('input[id="type_personal"][value="personal"]'))
