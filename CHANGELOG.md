@@ -1,3 +1,11 @@
+## [1.3.4](https://github.com/mob-sakai/unity-activate/compare/v1.3.3...v1.3.4) (2021-11-16)
+
+
+### Bug Fixes
+
+* add check - the email address has not been confirmed yet ([b0781e5](https://github.com/mob-sakai/unity-activate/commit/b0781e53a7b4cc84ebd4360f6f847ae281cfad98))
+* wait for navigation ([1e36625](https://github.com/mob-sakai/unity-activate/commit/1e366252ef2ba0b71cdc2662a35e698a8d984690))
+
 ## [1.3.3](https://github.com/mob-sakai/unity-activate/compare/v1.3.2...v1.3.3) (2021-11-15)
 
 
