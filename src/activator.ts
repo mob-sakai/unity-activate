@@ -34,20 +34,22 @@ export class Activator extends Crawler {
         await this.waitForSelector('#new_conversations_create_session_form #conversations_create_session_form_password')
 
         // Step: enter the username and password
-        console.log("  > enter the username and password")
         const username = this.options.username || await this.readUserInput("username: ");
         const password = this.options.password || await this.readUserInput("password: ", true);
 
         // [[ CHECK ]] The username (email) is incorrect
+        console.log("  > valid the username and password")
         if (!/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(username))
             throw new Error(`The username (email) is incorrect: ${username}`);
 
         // Step: close cookie dialog
+        console.log("  > close cookie dialog")
         await this.waitForTimeout(2000);
         if (await this.exists('#onetrust-close-btn-container > button'))
             await this.waitAndClick('#onetrust-close-btn-container > button');
 
         // Step: type the username and password
+        console.log("  > enter the username and password")
         await this.type('input[type=email]', username);
         await this.type('input[type=password]', password);
 
