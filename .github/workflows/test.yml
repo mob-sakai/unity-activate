@@ -15,13 +15,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: |
+      - name: Build
+        run: |
           npm ci
           npm run build
 
       - name: Request manual activation file
-        id: alf
+        id: alfFile
         uses: game-ci/unity-request-activation-file@main
-          
+
       - name: Activate license
-        run: node dist/index.js --username "${{ secrets.UNITY_EMAIL }}" --password "${{ secrets.UNITY_PASSWORD }}" --key "${{ secrets.UNITY_AUTHENTICATOR_KEY }}" "${{ steps.alf.outputs.filePath }}" -d
+        id: activate
+        run: |
+          node dist/index.js --username "${{ secrets.UNITY_EMAIL }}" --password "${{ secrets.UNITY_PASSWORD }}" --key "${{ secrets.UNITY_AUTHENTICATOR_KEY }}" -d "${{ steps.alfFile.outputs.filePath }}"
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: error.html
+          path: error.html
