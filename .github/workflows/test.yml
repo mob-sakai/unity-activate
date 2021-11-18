@@ -1,0 +1,27 @@
+name: test
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+  schedule:
+    - cron: "* * * * 0" # weekly
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: |
+          npm ci
+          npm run build
+
+      - name: Request manual activation file
+        id: alf
+        uses: game-ci/unity-request-activation-file@main
+          
+      - name: Activate license
+        run: node dist/index.js --username "${{ secrets.UNITY_EMAIL }}" --password "${{ secrets.UNITY_PASSWORD }}" --key "${{ secrets.UNITY_AUTHENTICATOR_KEY }}" "${{ steps.alf.outputs.filePath }}" -d
