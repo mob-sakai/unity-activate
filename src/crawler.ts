@@ -59,18 +59,13 @@ export abstract class Crawler {
 
         await Promise.all([
             this.page.goto(url),
-            this.page.waitForNavigation({ waitUntil: 'load' })
+            this.page.waitForNavigation({ waitUntil: 'domcontentloaded' })
         ]);
-    }
-
-    async waitForNavigation(): Promise<void> {
-        logger.debug(`waitForNavigation`);
-
-        await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' });
     }
 
     async exists(selector: string): Promise<boolean> {
         logger.debug(`exists: ${selector}`);
+        await this.page.waitForTimeout(1000);
 
         try {
             await this.page.waitForSelector(selector, { timeout: 2000 });
@@ -84,6 +79,7 @@ export abstract class Crawler {
 
     async click(selector: string, options?: ClickOptions): Promise<void> {
         logger.debug(`click: ${selector}`);
+        await this.page.waitForTimeout(1000);
 
         await Promise.all([
             this.page.click(selector, options),
@@ -93,6 +89,7 @@ export abstract class Crawler {
 
     async type(selector: string, text: string, options?: { delay: number }): Promise<void> {
         logger.debug(`type: ${selector} => ${text}`);
+        await this.page.waitForTimeout(1000);
 
         return await this.page.type(selector, text, options);
     }
@@ -126,12 +123,14 @@ export abstract class Crawler {
 
     async waitForSelector(selector: string): Promise<ElementHandle | null> {
         logger.debug(`waitForSelector: ${selector}`);
+        await this.page.waitForTimeout(1000);
 
         return await this.page.waitForSelector(selector, { timeout: 2000 });
     }
 
     async waitAndClick(selector: string): Promise<void> {
         logger.debug(`waitAndClick: ${selector}`);
+        await this.page.waitForTimeout(1000);
 
         await this.page.waitForSelector(selector, { timeout: 2000 });
         await this.page.evaluate(s => document.querySelector(s).click(), selector);
@@ -139,6 +138,7 @@ export abstract class Crawler {
 
     async waitForDownload(timeout: number = 5000): Promise<string | undefined> {
         logger.debug(`waitForDownload: timeout=${timeout}`);
+        await this.page.waitForTimeout(1000);
 
         let elapsed = 0;
         let downloadFile: string;

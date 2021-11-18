@@ -55,7 +55,6 @@ export class Activator extends Crawler {
 
         // Step: login
         console.log("  > login")
-        await this.waitForTimeout(1000);
         await this.click('input[name="commit"]');
 
         // [[ CHECK ]] The email address has not been confirmed yet
