@@ -11,7 +11,7 @@ cli.command('[opts] <file>', 'Activate Unity activation license file (*.alf).\nN
     .option('-p, --password <password>', 'Password to login Unity (default: $UNITY_PASSWORD)')
     .option('-k, --key <key>', 'The authenticator key to login (default: $UNITY_KEY).')
     .option('-s, --serial <serial>', 'Serial key to activate. If empty, activate as personal license.\nNOTE: Unity Personal Edition is not available to companies or organizations that earned more than USD100,000 in the previous fiscal year.\n')
-    .option('-d, --debug', 'Display additional log', { default: false })
+    .option('-d, --debug', 'Display additional log and dump content to \'error.html\' on error', { default: false })
     .option('--headful', 'Run "headful" puppeteer', { default: false })
     .action((file: string, __, options: ActivatorOptions) => (async () => {
         options.username ||= process.env.UNITY_USERNAME || '';
@@ -34,7 +34,7 @@ cli.help()
 
 try {
     cli.parse();
-} catch (e) {
+} catch (e: any) {
     console.error(e.message)
     console.error('Run `unity-activate --help` to show help.')
     process.exit(1);

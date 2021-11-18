@@ -12,10 +12,12 @@ export abstract class Crawler {
     tmpDir: string = "";
     downloadDir: string = "";
     hasError: boolean = false;
+    errorDump: string = "";
 
     constructor(debug: boolean, headless: boolean, downloadDir: string) {
         Object.assign(this, { headless, downloadDir });
         logger.level = debug ? "debug" : "off";
+        this.errorDump = debug ? "error.html" : "";
     }
 
     async run(): Promise<void> {
@@ -43,6 +45,11 @@ export abstract class Crawler {
             await this.crawl();
         }
         catch (e) {
+            if (this.errorDump)
+            {
+                fs.writeFileSync(this.errorDump, await this.page.content());
+                console.log(`Current DOM has been saved at ${this.errorDump}`);
+            }
             throw e;
         }
         finally {
