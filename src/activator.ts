@@ -4,6 +4,7 @@ import fs from 'fs';
 
 export interface ActivatorOptions {
     debug: boolean;
+    headful: boolean;
     username: string;
     password: string;
     key: string;
@@ -16,7 +17,7 @@ export class Activator extends Crawler {
     options: ActivatorOptions;
 
     constructor(options: ActivatorOptions) {
-        super(!options.debug, options.out);
+        super(options.debug, !options.headful, options.out);
         this.options = options;
         this.debug(`options:`, JSON.stringify(this.options));
     }

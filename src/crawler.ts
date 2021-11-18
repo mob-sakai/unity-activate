@@ -13,9 +13,9 @@ export abstract class Crawler {
     downloadDir: string = "";
     hasError: boolean = false;
 
-    constructor(headless: boolean, downloadDir: string) {
+    constructor(debug: boolean, headless: boolean, downloadDir: string) {
         Object.assign(this, { headless, downloadDir });
-        logger.level = headless ? "off" : "debug";
+        logger.level = debug ? "debug" : "off";
     }
 
     async run(): Promise<void> {
