@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/mob-sakai/unity-activate/compare/v1.3.4...v1.3.5) (2021-11-18)
+
+
+### Bug Fixes
+
+* add wait for action ([ad206ac](https://github.com/mob-sakai/unity-activate/commit/ad206ac6b8f02aa49dd74c83e7ae0b07b135e734))
+
 ## [1.3.4](https://github.com/mob-sakai/unity-activate/compare/v1.3.3...v1.3.4) (2021-11-16)
 
 
