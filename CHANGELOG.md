@@ -1,3 +1,11 @@
+## [1.3.7](https://github.com/mob-sakai/unity-activate/compare/v1.3.6...v1.3.7) (2021-11-18)
+
+
+### Bug Fixes
+
+* add check for input file name ([ff5979a](https://github.com/mob-sakai/unity-activate/commit/ff5979afda3180cd0b0be85809b9d9b1da92a79f))
+* dump content on error ([7d46761](https://github.com/mob-sakai/unity-activate/commit/7d467612331ee8d96e758d65a3f31bfffbad189c))
+
 ## [1.3.6](https://github.com/mob-sakai/unity-activate/compare/v1.3.5...v1.3.6) (2021-11-18)
 
 
