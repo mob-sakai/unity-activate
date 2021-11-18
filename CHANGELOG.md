@@ -1,3 +1,10 @@
+## [1.3.6](https://github.com/mob-sakai/unity-activate/compare/v1.3.5...v1.3.6) (2021-11-18)
+
+
+### Bug Fixes
+
+* add 'headful' option ([1ab22cf](https://github.com/mob-sakai/unity-activate/commit/1ab22cf3ee521aeebfbb3821ddc37a84b672d0af))
+
 ## [1.3.5](https://github.com/mob-sakai/unity-activate/compare/v1.3.4...v1.3.5) (2021-11-18)
 
 
