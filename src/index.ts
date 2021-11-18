@@ -20,6 +20,13 @@ cli.command('[opts] <file>', 'Activate Unity activation license file (*.alf).\nN
         options.serial ||= process.env.UNITY_SERIAL || '';
         options.file = file;
 
+        // [[CHECK]] input file name
+        if (!/(Unity_v.*.alf|\.ilf)/.test(file))
+        {
+            console.error(`Input activation license file should be named Unity_vX.alf or .ilf`);
+            process.exit(1);
+        }
+
         await new Activator(options).run()
             .then(_ => process.exit(0))
             .catch(e => {
