@@ -44,7 +44,6 @@ export class Activator extends Crawler {
 
         // Step: close cookie dialog
         console.log("  > close cookie dialog")
-        await this.waitForTimeout(2000);
         if (await this.exists('#onetrust-close-btn-container > button'))
             await this.waitAndClick('#onetrust-close-btn-container > button');
 
@@ -104,8 +103,8 @@ export class Activator extends Crawler {
 
         // Step: upload alf file.
         console.log("  > upload alf file")
-        var licenseFile = await this.waitForSelector('input[name="licenseFile"]');
-        if (licenseFile == null)
+        const licenseFile = await this.waitForSelector('input[name="licenseFile"]');
+        if (licenseFile === null)
             throw new Error(`'input[name="licenseFile"]' is not found`);
 
         await licenseFile.uploadFile(this.options.file)

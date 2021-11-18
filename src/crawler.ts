@@ -59,7 +59,7 @@ export abstract class Crawler {
 
         await Promise.all([
             this.page.goto(url),
-            this.page.waitForNavigation({ waitUntil: 'domcontentloaded' })
+            this.page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
         ]);
     }
 
@@ -83,7 +83,7 @@ export abstract class Crawler {
 
         await Promise.all([
             this.page.click(selector, options),
-            this.page.waitForNavigation({ waitUntil: 'load' })
+            this.page.waitForNavigation({ waitUntil: 'load' }),
         ]);
     }
 
