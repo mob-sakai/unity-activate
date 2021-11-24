@@ -6,7 +6,7 @@ on:
       - develop
       - main
   schedule:
-    - cron: "* * * * 0" # weekly
+    - cron: "0 0 * * 0" # weekly
   workflow_dispatch:
 
 jobs:
