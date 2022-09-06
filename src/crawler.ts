@@ -1,7 +1,6 @@
 import puppeteer, { Page, ElementHandle, ClickOptions } from 'puppeteer';
 import { getLogger } from "log4js";
 import * as path from 'path';
-import * as os from 'os';
 import * as fs from 'fs';
 
 const logger = getLogger();
@@ -31,7 +30,12 @@ export abstract class Crawler {
         );
 
         this.page = (await browser.pages())[0];
-        this.tmpDir = path.join(os.tmpdir(), Math.random().toString(32).substring(2));
+	//
+	// there can be a privilege problem to create a directory
+	//
+        //this.tmpDir = path.join(os.tmpdir(), Math.random().toString(32).substring(2));
+        this.tmpDir = path.join(".", Math.random().toString(32).substring(2));
+
         fs.mkdirSync(this.tmpDir);
 
         const client = await this.page.target().createCDPSession()

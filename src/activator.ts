@@ -128,14 +128,15 @@ export class Activator extends Crawler {
         } else {
             await this.waitAndClick('input[id="type_personal"][value="personal"]');
             await this.waitAndClick('input[id="option3"][name="personal_capacity"]');
-            await this.waitAndClick('input[class="btn mb10"]')
+            await this.waitAndClick('input[name="commit"][class="btn mb10"]')
         }
 
         // Step: download ulf
         console.log("  > download ulf")
         await this.waitForTimeout(500);
         await this.waitAndClick('input[name="commit"]');
-        const ulf = await this.waitForDownload();
+
+        const ulf = await this.waitForDownload(50000);
 
         // [[ CHECK ]] Download failed
         if (!ulf)
