@@ -1,3 +1,10 @@
+## [1.3.8](https://github.com/mob-sakai/unity-activate/compare/v1.3.7...v1.3.8) (2022-09-13)
+
+
+### Bug Fixes
+
+* there can be a privilege problem to create a temporary directory ([0a44496](https://github.com/mob-sakai/unity-activate/commit/0a444964d57486cf8a5d52287ba27762aa1ad18a))
+
 ## [1.3.7](https://github.com/mob-sakai/unity-activate/compare/v1.3.6...v1.3.7) (2021-11-18)
 
 
