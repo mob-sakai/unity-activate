@@ -41,7 +41,7 @@ export abstract class Crawler {
         const client = await this.page.target().createCDPSession()
         await client.send('Page.setDownloadBehavior', {
             behavior: 'allow',
-            downloadPath: this.tmpDir,
+            downloadPath: path.resolve(this.tmpDir),
         });
 
         try {
