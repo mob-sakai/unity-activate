@@ -134,14 +134,12 @@ export abstract class Crawler {
 
     async waitForSelector(selector: string): Promise<ElementHandle | null> {
         logger.debug(`waitForSelector: ${selector}`);
-        await this.page.waitForTimeout(1000);
 
         return await this.page.waitForSelector(selector, { timeout: 2000 });
     }
 
     async waitAndClick(selector: string): Promise<void> {
         logger.debug(`waitAndClick: ${selector}`);
-        await this.page.waitForTimeout(1000);
 
         await this.page.waitForSelector(selector, { timeout: 2000 });
         
@@ -153,7 +151,6 @@ export abstract class Crawler {
 
     async waitForDownload(timeout: number = 5000): Promise<string | undefined> {
         logger.debug(`waitForDownload: timeout=${timeout}`);
-        await this.page.waitForTimeout(1000);
 
         let elapsed = 0;
         let downloadFile: string;
