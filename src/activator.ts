@@ -1,6 +1,7 @@
 import { authenticator } from 'otplib';
 import { Crawler } from './crawler';
 import fs from 'fs';
+import { ElementHandle } from 'puppeteer';
 
 export interface ActivatorOptions {
     debug: boolean;
@@ -108,7 +109,8 @@ export class Activator extends Crawler {
         if (licenseFile === null)
             throw new Error(`'input[name="licenseFile"]' is not found`);
 
-        await licenseFile.uploadFile(this.options.file)
+        const licenseElement = licenseFile as ElementHandle<HTMLInputElement>;
+        await licenseElement.uploadFile(this.options.file)
         await this.click('input[name="commit"]')
 
         // [[ CHECK ]] Not valid for Unity activation license file

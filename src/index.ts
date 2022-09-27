@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 import { ActivatorOptions, Activator } from './activator';
-import cac from 'cac';
+import { CAC } from 'cac';
 import getPackageVersion from '@jsbits/get-package-version'
 
-const cli = cac();
+const cli = new CAC();
 cli.command('[opts] <file>', 'Activate Unity activation license file (*.alf).\nNOTE: If two-factor authentication is enabled, the verify code will be requested.')
     .option('-o, --out <dir>', 'Output ulf file to the specified directory', { default: '.' })
     .option('-u, --username <username>', 'Username (email) to login Unity (default: $UNITY_USERNAME)')

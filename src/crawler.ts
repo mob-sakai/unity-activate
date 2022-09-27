@@ -144,7 +144,11 @@ export abstract class Crawler {
         await this.page.waitForTimeout(1000);
 
         await this.page.waitForSelector(selector, { timeout: 2000 });
-        await this.page.evaluate(s => document.querySelector(s).click(), selector);
+        
+        await this.page.evaluate(s =>  {
+            const element = document.querySelector(s) as HTMLElement;
+            if(element !== null) element.click() 
+        } , selector);
     }
 
     async waitForDownload(timeout: number = 5000): Promise<string | undefined> {
