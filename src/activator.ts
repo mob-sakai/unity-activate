@@ -96,11 +96,9 @@ export class Activator extends Crawler {
         }
 
         // Step: close update dialog
-        await this.waitForTimeout(2000);
         console.log("  > close update dialog")
         if (await this.exists('#new_conversations_accept_updated_tos_form button.novalidation.accept')) {
             await this.waitAndClick('#new_conversations_accept_updated_tos_form button.novalidation.accept');
-            await this.waitForTimeout(500);
         }
 
         // Step: upload alf file.
