@@ -37,11 +37,13 @@ export abstract class Crawler {
         this.tmpDir = path.join(".", Math.random().toString(32).substring(2));
 
         fs.mkdirSync(this.tmpDir);
+        const _tempDir = path.resolve(this.tmpDir);
+        logger.debug(`temDir: ${_tempDir}`);
 
         const client = await this.page.target().createCDPSession()
         await client.send('Page.setDownloadBehavior', {
             behavior: 'allow',
-            downloadPath: path.resolve(this.tmpDir),
+            downloadPath: _tempDir,
         });
 
         try {
@@ -76,10 +78,10 @@ export abstract class Crawler {
 
     async exists(selector: string): Promise<boolean> {
         logger.debug(`exists: ${selector}`);
-        await this.page.waitForTimeout(1000);
+        await this.waitForTimeout(1000);
 
         try {
-            await this.page.waitForSelector(selector, { timeout: 2000 });
+            await this.page.waitForSelector(selector, { timeout: 5000 });
             logger.debug(`  -> true`);
             return true;
         } catch (e) {
@@ -90,7 +92,7 @@ export abstract class Crawler {
 
     async click(selector: string, options?: ClickOptions): Promise<void> {
         logger.debug(`click: ${selector}`);
-        await this.page.waitForTimeout(1000);
+        await this.waitForTimeout(1000);
 
         await Promise.all([
             this.page.click(selector, options),
@@ -100,7 +102,7 @@ export abstract class Crawler {
 
     async type(selector: string, text: string, options?: { delay: number }): Promise<void> {
         logger.debug(`type: ${selector} => ${text}`);
-        await this.page.waitForTimeout(1000);
+        await this.waitForTimeout(1000);
 
         return await this.page.type(selector, text, options);
     }
@@ -135,17 +137,17 @@ export abstract class Crawler {
     async waitForSelector(selector: string): Promise<ElementHandle | null> {
         logger.debug(`waitForSelector: ${selector}`);
 
-        return await this.page.waitForSelector(selector, { timeout: 2000 });
+        return await this.page.waitForSelector(selector, { timeout: 5000 });
     }
 
     async waitAndClick(selector: string): Promise<void> {
         logger.debug(`waitAndClick: ${selector}`);
 
-        await this.page.waitForSelector(selector, { timeout: 2000 });
-        
-        await this.page.evaluate(s =>  {
+        await this.page.waitForSelector(selector, { timeout: 5000 });
+
+        await this.page.evaluate((s: string) =>  {
             const element = document.querySelector(s) as HTMLElement;
-            if(element !== null) element.click() 
+            if(element !== null) element.click()
         } , selector);
     }
 
@@ -160,11 +162,14 @@ export abstract class Crawler {
             downloadFile = fs.readdirSync(this.tmpDir)[0]
         } while (elapsed < timeout && (!downloadFile || downloadFile.endsWith('.crdownload')))
 
-        if (!downloadFile) return undefined;
+        if (!downloadFile) {
+            return undefined;
+        }
 
         // create download dir
-        if (!fs.existsSync(this.downloadDir) || !fs.statSync(this.downloadDir).isDirectory())
+        if (!fs.existsSync(this.downloadDir) || !fs.statSync(this.downloadDir).isDirectory()) {
             fs.mkdirSync(this.downloadDir, { recursive: true });
+        }
 
         // move to download path
         const downloadPath = path.resolve(this.downloadDir, downloadFile);
