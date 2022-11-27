@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/mob-sakai/unity-activate/compare/v1.3.8...v1.4.0) (2022-11-27)
+
+
+### Bug Fixes
+
+* download failed on ulf file ([853f70d](https://github.com/mob-sakai/unity-activate/commit/853f70d31fba51ccf63b396473c21fd0dc7ef0eb))
+* fix selectors for download button click ([de45072](https://github.com/mob-sakai/unity-activate/commit/de450724d331c2f110c0825f6cbc62f9de265b24))
+* removed some timeouts thats seems unnecessary now ([a47d2b8](https://github.com/mob-sakai/unity-activate/commit/a47d2b8986992139071cfd263a1d9a0654105b1f))
+
+
+### Features
+
+* update puppeteer 11.0.0 to 18.0.0 ([73dc2de](https://github.com/mob-sakai/unity-activate/commit/73dc2dea5bc38033e9d4302dfbd386e7c3ffcf9a))
+
 ## [1.3.8](https://github.com/mob-sakai/unity-activate/compare/v1.3.7...v1.3.8) (2022-09-13)
 
 
