@@ -1,6 +1,6 @@
 {
   "name": "unity-activate",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A tool to activate Unity license.",
   "license": "MIT",
   "engines": {

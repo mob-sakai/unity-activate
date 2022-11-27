@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/mob-sakai/unity-activate/compare/v1.4.0...v1.4.1) (2022-11-27)
+
+
+### Bug Fixes
+
+* update help & docs ([5e4d8d1](https://github.com/mob-sakai/unity-activate/commit/5e4d8d148a9b2216a5a1c207b94349691131c47d))
+
 # [1.4.0](https://github.com/mob-sakai/unity-activate/compare/v1.3.8...v1.4.0) (2022-11-27)
 
 
