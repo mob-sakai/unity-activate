@@ -58,7 +58,8 @@ Options:
   -s, --serial <serial>        Serial key to activate (default: $UNITY_SERIAL). If empty, activate as personal license.
 NOTE: Unity Personal Edition is not available to companies or organizations that earned more than USD100,000 in the previous fiscal year.
  
-  -d, --debug                  Run "headful" puppeteer (default: false)
+  -d, --debug                  Display additional log and dump content to 'error.html' on error (default: false)
+  --headful                    Run "headful" puppeteer (default: false)
   -h, --help                   Display this message 
   -v, --version                Display version number
 ```
