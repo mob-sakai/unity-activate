@@ -1,19 +1,19 @@
 name: test
 
 on:
-  push:
-    branches:
-      - develop
-      - main
-  schedule:
-    - cron: "0 0 * * 0" # weekly
+  # push:
+  #   branches:
+  #     - develop
+  #     - main
+  # schedule:
+  #   - cron: "0 0 * * 0" # weekly
   workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Build
         run: |
@@ -29,7 +29,7 @@ jobs:
         run: |
           node dist/index.js --username "${{ secrets.UNITY_EMAIL }}" --password "${{ secrets.UNITY_PASSWORD }}" --key "${{ secrets.UNITY_AUTHENTICATOR_KEY }}" -d "${{ steps.alfFile.outputs.filePath }}"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: error.html
